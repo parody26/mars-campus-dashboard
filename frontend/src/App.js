@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API = "http://localhost:8000";
-
+const API = "https://mars-campus-backend.onrender.com";
 function App() {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
@@ -31,10 +30,10 @@ function App() {
   const fetchDashboard = async () => {
     try {
       const [library, mess, events, academics] = await Promise.all([
-        axios.get("http://localhost:8001/library/hours"),
-        axios.get("http://localhost:8002/cafeteria/menu"),
-        axios.get("http://localhost:8003/events/upcoming"),
-        axios.get("http://localhost:8004/academics/exams"),
+        axios.get("https://mars-campus-backend.onrender.com/library/hours"),
+        axios.get("https://mars-campus-backend.onrender.com/cafeteria/menu"),
+        axios.get("https://mars-campus-backend.onrender.com/events/upcoming"),
+        axios.get("https://mars-campus-backend.onrender.com/academics/exams"),
       ]);
       setDashboardData({
         library: library.data.data,
