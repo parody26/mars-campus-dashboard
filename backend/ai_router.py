@@ -60,7 +60,7 @@ def generate_answer(question: str, data: dict, server_name: str):
     prompt = f"""You are a campus assistant. Today is {today}.
 Question: "{question}"
 Data: {data}
-Answer in 2-3 complete sentences. No markdown, no bold text, no asterisks. Be specific and friendly."""
+Answer in 2-3 complete sentences. No markdown, no bold text, no asterisks. Be specific and friendly. Do not reply off topic."""
 
     try:
         response = client.chat.completions.create(
