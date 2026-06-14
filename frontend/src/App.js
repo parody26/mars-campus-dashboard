@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API = "const API = "http://localhost:8000";";
-function App() {
+const API = "https://mars-campus-backend.onrender.com";function App() {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,10 +31,10 @@ function App() {
   setBackendLoading(true);
   try {
     const [library, mess, events, academics] = await Promise.all([
-      axios.get("http://localhost:8001/library/hours"),
-      axios.get("http://localhost:8002/cafeteria/menu"),
-      axios.get("http://localhost:8003/events/upcoming"),
-      axios.get("http://localhost:8004/academics/exams"),
+      axios.get(`${API}/library/hours`),
+      axios.get(`${API}/cafeteria/menu`),
+      axios.get(`${API}/events/upcoming`),
+      axios.get(`${API}/academics/exams`),
     ]);
     setDashboardData({
       library: library.data.data,
