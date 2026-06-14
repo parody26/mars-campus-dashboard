@@ -126,16 +126,22 @@ function App() {
             {
               key: "mess",
               icon: "🍽️",
-              title: "Mess Menu",
+              title: "Mess Menu — Today",
               color: "green",
-              content: dashboardData.mess
-                ? Object.entries(dashboardData.mess).slice(0, 3).map(([day, items]) => (
-                    <div key={day} className="card-row">
-                      <span className="day">{day}</span>
+              content: dashboardData.mess ? (() => {
+                const days = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+                const today = days[new Date().getDay()];
+                const todayMenu = dashboardData.mess[today];
+                return todayMenu ? (
+                  Object.entries(todayMenu).map(([meal, items]) => (
+                    <div key={meal} className="card-row">
+                      <span className="day">{meal}</span>
                       <span className="time">{items.join(", ")}</span>
                     </div>
                   ))
-                : <div className="skeleton-loader"><div className="skel"/><div className="skel"/><div className="skel"/></div>,
+                ) : <p className="loading-text">No menu today</p>;
+              })()
+              : <div className="skeleton-loader"><div className="skel"/><div className="skel"/><div className="skel"/></div>,
             },
             {
               key: "events",
