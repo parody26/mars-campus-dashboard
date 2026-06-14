@@ -10,6 +10,7 @@ function App() {
   const [dashboardData, setDashboardData] = useState({});
   const [activeCard, setActiveCard] = useState(null);
   const [typed, setTyped] = useState("");
+  const [backendLoading, setBackendLoading] = useState(true);
 
   const heroText = "Your Campus, Unified.";
 
@@ -28,6 +29,7 @@ function App() {
   }, []);
 
   const fetchDashboard = async () => {
+  setBackendLoading(true);
   try {
     const [library, mess, events, academics] = await Promise.all([
       axios.get(`${API}/library/hours`),
@@ -44,6 +46,7 @@ function App() {
   } catch (err) {
     console.error("Dashboard fetch error:", err);
   }
+  setBackendLoading(false);
 };
 
   const askQuestion = async () => {
@@ -79,7 +82,22 @@ function App() {
     "Any events this week?",
     "When is the CS exam?",
   ];
+  if (backendLoading) {
+    return (
+      <div className="app">
+        <div className="blob blob1" />
+        <div className="blob blob2" />
+        <div className="blob blob3" />
+        <div className="loading-screen">
+          <div className="spinner" />
+          <p className="loading-msg">Connecting to campus servers...</p>
+          <p className="loading-sub">This may take up to 50 seconds on first load</p>
+        </div>
+      </div>
+    );
+  }
 
+  
   return (
     <div className="app">
       {/* Animated background blobs */}
@@ -136,10 +154,10 @@ function App() {
                   Object.entries(todayMenu).map(([meal, items]) => (
                     <div key={meal} className="card-row">
                       <span className="day">{meal}</span>
-                      <span className="time">{items.join(", ")}</span>
+                      <span className="time">{Array.isArray(items) ? items.join(", ") : items}</span>
                     </div>
                   ))
-                ) : <p className="loading-text">No menu today</p>;
+                ) : <p className="loading-text">No menu available</p>;
               })()
               : <div className="skeleton-loader"><div className="skel"/><div className="skel"/><div className="skel"/></div>,
             },
