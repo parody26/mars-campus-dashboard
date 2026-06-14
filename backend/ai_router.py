@@ -54,10 +54,13 @@ def fetch_data(server_name: str, endpoint: str):
         return {"error": f"Could not fetch data: {str(e)}"}
 
 def generate_answer(question: str, data: dict, server_name: str):
-    # Try AI first
-    prompt = f"""You are a helpful campus assistant. A student asked: "{question}"
-Here is the data: {data}
-Give a friendly answer in 2 sentences max. Be direct and specific"""
+    from datetime import datetime
+    today = datetime.now().strftime("%A, %B %d, %Y")
+    
+    prompt = f"""You are a campus assistant. Today is {today}.
+Question: "{question}"
+Data: {data}
+Answer in 2-3 sentences. Be specific. If asked about "this week" or "today", only mention relevant items based on today's date."""
 
     try:
         response = client.chat.completions.create(
@@ -70,38 +73,30 @@ Give a friendly answer in 2 sentences max. Be direct and specific"""
     except:
         pass
 
-    # Fallback — generate answer directly from data
+    # Fallback
     if server_name == "library":
         d = data.get("data", {})
         if isinstance(d, dict):
             hours = ", ".join([f"{k.replace('_',' ')}: {v}" for k,v in d.items()])
             return f"The library is open: {hours}."
-        return "Library information retrieved successfully."
-
     elif server_name == "mess":
         d = data.get("data", {})
-        if isinstance(d, dict):
-            items = list(d.items())[:2]
-            menu = ", ".join([f"{k}: {', '.join(v)}" for k,v in items])
-            return f"Here's the mess menu — {menu}."
+        today_name = datetime.now().strftime("%A").lower()
+        if today_name in d:
+            menu = d[today_name]
+            return f"Today's mess menu: {menu}"
         return "Mess menu retrieved successfully."
-
     elif server_name == "events":
         d = data.get("data", [])
         if isinstance(d, list) and len(d) > 0:
             names = ", ".join([e.get("name","") for e in d[:3]])
-            return f"Upcoming events: {names}. Check the dashboard for dates and venues!"
-        return "Events information retrieved successfully."
-
+            return f"Upcoming events: {names}."
     elif server_name == "academics":
         d = data.get("data", [])
         if isinstance(d, list) and len(d) > 0:
-            exams = ", ".join([f"{e.get('subject','')} on {e.get('date','')}" for e in d[:3]])
+            exams = ", ".join([f"{e.get('subject','')} on {e.get('date','')}" for e in d])
             return f"Upcoming exams: {exams}."
-        return "Academic information retrieved successfully."
-
-    return "I found the information! Please check the dashboard cards above for details."
-
+    return "I found the information! Check the dashboard cards for details."
 def answer_question(question: str):
     routing = decide_server(question)
     try:
