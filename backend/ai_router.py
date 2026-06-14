@@ -44,13 +44,14 @@ Example: library|/library/hours"""
     return response.choices[0].message.content.strip()
 
 def fetch_data(server_name: str, endpoint: str):
-    port = SERVERS[server_name]["port"]
-    url = f"http://localhost:{port}{endpoint}"
+    # On hosted environment, call our own main server endpoints
+    base_url = os.getenv("BASE_URL", "http://localhost:8000")
+    url = f"{base_url}{endpoint}"
     try:
-        response = requests.get(url, timeout=5)
+        response = requests.get(url, timeout=10)
         return response.json()
     except Exception as e:
-        return {"error": f"Could not reach {server_name} server: {str(e)}"}
+        return {"error": f"Could not fetch data: {str(e)}"}
 
 def generate_answer(question: str, data: dict, server_name: str):
     # Try AI first
