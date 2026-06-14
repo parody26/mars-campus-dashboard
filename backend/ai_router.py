@@ -35,7 +35,7 @@ Example: library|/library/hours"""
     response = client.chat.completions.create(
         model=MODEL,
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=20
+        max_tokens=300
     )
     
     if not response.choices or response.choices[0].message.content is None:
@@ -62,7 +62,7 @@ Give a friendly answer in 2-3 sentences based only on this data."""
         response = client.chat.completions.create(
             model=MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=150
+            max_tokens=300
         )
         if response.choices and response.choices[0].message.content:
             return response.choices[0].message.content.strip()
