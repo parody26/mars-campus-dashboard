@@ -28,23 +28,23 @@ function App() {
   }, []);
 
   const fetchDashboard = async () => {
-    try {
-      const [library, mess, events, academics] = await Promise.all([
-        axios.get("https://mars-campus-backend.onrender.com/library/hours"),
-        axios.get("https://mars-campus-backend.onrender.com/cafeteria/menu"),
-        axios.get("https://mars-campus-backend.onrender.com/events/upcoming"),
-        axios.get("https://mars-campus-backend.onrender.com/academics/exams"),
-      ]);
-      setDashboardData({
-        library: library.data.data,
-        mess: mess.data.data,
-        events: events.data.data,
-        academics: academics.data.data,
-      });
-    } catch (err) {
-      console.error("Dashboard fetch error:", err);
-    }
-  };
+  try {
+    const [library, mess, events, academics] = await Promise.all([
+      axios.get(`${API}/library/hours`),
+      axios.get(`${API}/cafeteria/menu`),
+      axios.get(`${API}/events/upcoming`),
+      axios.get(`${API}/academics/exams`),
+    ]);
+    setDashboardData({
+      library: library.data.data,
+      mess: mess.data.data,
+      events: events.data.data,
+      academics: academics.data.data,
+    });
+  } catch (err) {
+    console.error("Dashboard fetch error:", err);
+  }
+};
 
   const askQuestion = async () => {
     if (!question.trim()) return;
