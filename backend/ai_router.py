@@ -57,13 +57,13 @@ def generate_answer(question: str, data: dict, server_name: str):
     # Try AI first
     prompt = f"""You are a helpful campus assistant. A student asked: "{question}"
 Here is the data: {data}
-Give a friendly answer in 2-3 sentences based only on this data."""
+Give a friendly answer in 2 sentences max. Be direct and specific"""
 
     try:
         response = client.chat.completions.create(
             model=MODEL,
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=300
+            max_tokens=500
         )
         if response.choices and response.choices[0].message.content:
             return response.choices[0].message.content.strip()
