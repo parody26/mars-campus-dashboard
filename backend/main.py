@@ -36,11 +36,41 @@ def get_books():
 @app.get("/cafeteria/menu")
 def get_menu():
     return {"source": "cafeteria", "data": {
-        "monday": ["Pasta", "Salad", "Juice"],
-        "tuesday": ["Rice & Dal", "Roti", "Lassi"],
-        "wednesday": ["Burger", "Fries", "Cold Drink"],
-        "thursday": ["Paneer Curry", "Naan", "Buttermilk"],
-        "friday": ["Pizza", "Garlic Bread", "Lemonade"]
+        "sunday": {
+            "breakfast": ["Poha", "Chai", "Banana"],
+            "lunch": ["Dal Rice", "Sabzi", "Roti", "Buttermilk"],
+            "dinner": ["Paneer Curry", "Naan", "Kheer"]
+        },
+        "monday": {
+            "breakfast": ["Idli", "Sambar", "Coconut Chutney"],
+            "lunch": ["Rajma Rice", "Salad", "Lassi"],
+            "dinner": ["Pasta", "Garlic Bread", "Juice"]
+        },
+        "tuesday": {
+            "breakfast": ["Paratha", "Curd", "Pickle"],
+            "lunch": ["Chole Bhature", "Onion Salad", "Lassi"],
+            "dinner": ["Fried Rice", "Manchurian", "Cold Drink"]
+        },
+        "wednesday": {
+            "breakfast": ["Upma", "Chai", "Boiled Eggs"],
+            "lunch": ["Dal Makhani", "Roti", "Rice", "Raita"],
+            "dinner": ["Burger", "Fries", "Milkshake"]
+        },
+        "thursday": {
+            "breakfast": ["Puri Bhaji", "Chai"],
+            "lunch": ["Paneer Butter Masala", "Naan", "Rice"],
+            "dinner": ["Dosa", "Sambar", "Chutney"]
+        },
+        "friday": {
+            "breakfast": ["Bread Omelette", "Juice"],
+            "lunch": ["Biryani", "Raita", "Salad"],
+            "dinner": ["Pizza", "Garlic Bread", "Lemonade"]
+        },
+        "saturday": {
+            "breakfast": ["Aloo Paratha", "Curd", "Chai"],
+            "lunch": ["Kadhi Chawal", "Papad", "Pickle"],
+            "dinner": ["Chaat", "Samosa", "Masala Chai"]
+        }
     }}
 
 @app.get("/cafeteria/timings")
@@ -51,9 +81,11 @@ def get_timings():
 @app.get("/events/upcoming")
 def get_events():
     return {"source": "events", "data": [
-        {"name": "Tech Fest 2026", "date": "June 20, 2026", "venue": "Main Auditorium", "time": "10:00 AM"},
-        {"name": "AI Workshop", "date": "June 22, 2026", "venue": "Lab Block 3", "time": "2:00 PM"},
-        {"name": "Cultural Night", "date": "June 25, 2026", "venue": "Open Air Theatre", "time": "6:00 PM"}
+        {"name": "Tech Fest 2026", "date": "June 16, 2026", "venue": "Main Auditorium", "time": "10:00 AM", "day": "Monday"},
+        {"name": "AI Workshop", "date": "June 18, 2026", "venue": "Lab Block 3", "time": "2:00 PM", "day": "Tuesday"},
+        {"name": "Cultural Night", "date": "June 21, 2026", "venue": "Open Air Theatre", "time": "6:00 PM", "day": "Thursday"},
+        {"name": "Robotics Demo", "date": "June 23, 2026", "venue": "Engineering Block", "time": "11:00 AM", "day": "Friday"},
+        {"name": "Sports Meet", "date": "June 25, 2026", "venue": "Ground", "time": "8:00 AM", "day": "Sunday"}
     ]}
 
 @app.get("/events/clubs")
