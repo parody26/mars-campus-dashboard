@@ -1,8 +1,9 @@
 # 🎓 MARS Campus Intelligence Dashboard
 
 A Unified Campus Intelligence Dashboard with an AI Assistant built for MARS Open Projects 2026.
-
+## 📸 Demo
 Live Demo: https://your-vercel-url.vercel.app
+## 💻 Backend
 Backend: https://mars-campus-backend.onrender.com
 
 ## 🚀 Features
@@ -54,5 +55,3 @@ npm start
 ### Environment Variables
 Create `backend/.env`:
 OPENROUTER_API_KEY=your_key_here
-## 📸 Demo
-Live demo: [coming soon]
