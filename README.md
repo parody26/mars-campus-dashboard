@@ -2,6 +2,9 @@
 
 A Unified Campus Intelligence Dashboard with an AI Assistant built for MARS Open Projects 2026.
 
+Live Demo: https://your-vercel-url.vercel.app
+Backend: https://mars-campus-backend.onrender.com
+
 ## 🚀 Features
 - 4 independent MCP servers for different campus data sources
 - AI Assistant that routes natural language queries to the correct server in real-time
