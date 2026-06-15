@@ -96,41 +96,42 @@ def get_timings():
 def get_events():
     return {"source": "events", "data": [
         {
-            "name": "Cognizance 2026 — Annual Tech Fest",
-            "date": "June 20, 2026",
+            "name": "International Conference on Virology & Immunology (ICVI)",
+            "date": "July 2, 2026",
             "venue": "IIT Roorkee Campus",
             "time": "9:00 AM",
-            "description": "Asia's largest student-run technical festival"
-        },
-        {
-            "name": "AI & ML Workshop by IITR ACM",
-            "date": "June 22, 2026",
-            "venue": "CSE Department, Lab 3",
-            "time": "2:00 PM",
-            "description": "Hands-on workshop on deep learning and LLMs"
-        },
-        {
-            "name": "Thomso 2026 — Cultural Fest",
-            "date": "June 25, 2026",
-            "venue": "Convocation Hall & Open Air Theatre",
-            "time": "5:00 PM",
-            "description": "IIT Roorkee's annual cultural extravaganza"
+            "description": "International research conference hosted at IITR"
         },
         {
             "name": "Inter-IIT Sports Meet Trials",
-            "date": "June 28, 2026",
+            "date": "June 20, 2026",
             "venue": "Sports Complex, IITR",
             "time": "6:00 AM",
             "description": "Selection trials for Inter-IIT Sports Meet 2026"
         },
         {
-            "name": "Entrepreneurship Summit by E-Cell IITR",
-            "date": "July 2, 2026",
+            "name": "E-Cell IITR Entrepreneurship Workshop",
+            "date": "June 22, 2026",
             "venue": "Lecture Hall Complex",
             "time": "10:00 AM",
-            "description": "Startup pitches, investor talks, and networking"
+            "description": "Startup pitches and investor networking by E-Cell IITR"
+        },
+        {
+            "name": "IITR ACM — AI & LLM Workshop",
+            "date": "June 28, 2026",
+            "venue": "CSE Department, Lab 3",
+            "time": "2:00 PM",
+            "description": "Hands-on workshop on Large Language Models and Agentic AI"
+        },
+        {
+            "name": "International Conference on Global Business & Leadership (ICGBLSS)",
+            "date": "August 1, 2026",
+            "venue": "IIT Roorkee",
+            "time": "9:00 AM",
+            "description": "International conference on business and leadership"
         }
     ]}
+    
 
 @app.get("/events/clubs")
 def get_clubs():

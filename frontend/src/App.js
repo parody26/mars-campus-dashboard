@@ -13,12 +13,17 @@ const API = "https://mars-campus-backend.onrender.com";function App() {
 
   const heroText = "Your Campus, Unified.";
 
+  const [typingDone, setTypingDone] = useState(false);
+
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
       setTyped(heroText.slice(0, i));
       i++;
-      if (i > heroText.length) clearInterval(interval);
+      if (i > heroText.length) {
+        clearInterval(interval);
+        setTypingDone(true);
+      }
     }, 60);
     return () => clearInterval(interval);
   }, []);
@@ -107,7 +112,8 @@ const API = "https://mars-campus-backend.onrender.com";function App() {
       <header className="header">
         <div className="header-badge">🚀 MARS — Models & Robotics Section</div>
         <h1 className="hero-title">
-          {typed}<span className="cursor">|</span>
+          {typed}
+          {!typingDone && <span className="cursor">|</span>}
         </h1>
         <p className="hero-sub">
           Ask anything. Get instant answers from live campus systems.
