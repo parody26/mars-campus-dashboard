@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API = "https://mars-campus-backend.onrender.com";function App() {
+const API = "https://mars-campus-backend.onrender.com";
+
+function App() {
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -10,10 +12,9 @@ const API = "https://mars-campus-backend.onrender.com";function App() {
   const [activeCard, setActiveCard] = useState(null);
   const [typed, setTyped] = useState("");
   const [backendLoading, setBackendLoading] = useState(true);
+  const [typingDone, setTypingDone] = useState(false);
 
   const heroText = "Your Campus, Unified.";
-
-  const [typingDone, setTypingDone] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -33,25 +34,25 @@ const API = "https://mars-campus-backend.onrender.com";function App() {
   }, []);
 
   const fetchDashboard = async () => {
-  setBackendLoading(true);
-  try {
-    const [library, mess, events, academics] = await Promise.all([
-      axios.get(`${API}/library/hours`),
-      axios.get(`${API}/cafeteria/menu`),
-      axios.get(`${API}/events/upcoming`),
-      axios.get(`${API}/academics/exams`),
-    ]);
-    setDashboardData({
-      library: library.data.data,
-      mess: mess.data.data,
-      events: events.data.data,
-      academics: academics.data.data,
-    });
-  } catch (err) {
-    console.error("Dashboard fetch error:", err);
-  }
-  setBackendLoading(false);
-};
+    setBackendLoading(true);
+    try {
+      const [library, mess, events, academics] = await Promise.all([
+        axios.get(`${API}/library/hours`),
+        axios.get(`${API}/cafeteria/menu`),
+        axios.get(`${API}/events/upcoming`),
+        axios.get(`${API}/academics/exams`),
+      ]);
+      setDashboardData({
+        library: library.data.data,
+        mess: mess.data.data,
+        events: events.data.data,
+        academics: academics.data.data,
+      });
+    } catch (err) {
+      console.error("Dashboard fetch error:", err);
+    }
+    setBackendLoading(false);
+  };
 
   const askQuestion = async () => {
     if (!question.trim()) return;
