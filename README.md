@@ -2,7 +2,7 @@
 
 A Unified Campus Intelligence Dashboard with an AI Assistant built for MARS Open Projects 2026.
 ## 📸 Demo
-Live Demo: https://your-vercel-url.vercel.app
+Live Demo: [https://your-vercel-url.vercel.app](https://mars-campus-dashboard-junv.vercel.app/)
 ## 💻 Backend
 Backend: https://mars-campus-backend.onrender.com
 
